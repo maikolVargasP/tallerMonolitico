@@ -1,6 +1,8 @@
 <?php
+namespace App\Models\Databases;
 
-class Notas_AppDB
+use mysqli;
+class AppNotasDB
 {
     private $hostDb = "localhost";
     private $userDb = "root";
@@ -25,7 +27,7 @@ class Notas_AppDB
         $this->conexDb->close();
     }
 
-    public function execSQL($sql, $isSelect, ...$bindParam = null)
+    public function execSQL($sql, $isSelect, ...$bindParam) 
     {
         $prepare = $this->conexDb->prepare($sql);
         if (!empty($bindParam)) {

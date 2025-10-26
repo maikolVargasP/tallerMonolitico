@@ -23,12 +23,12 @@ if ($conexDb->connect_error) {
 }
 
 // Sentencia SQL corregida
-$sql = "UPDATE estudiantes 
-        SET nombre = ?, email = ?, programa = ? 
-        WHERE codigo = ?";
+$sql = "INSERT INTO estudiantes (codigo, nombre, email, programa)
+        VALUES (?, ?, ?, ?)";
 
+// Usar prepared statement para mayor seguridad
 $prepare = $conexDb->prepare($sql);
-$prepare->bind_param("ssss", $nombre, $email, $programa, $codigo);
+$prepare->bind_param("ssss", $codigo, $nombre, $email, $programa);
 $result = $prepare->execute();
 
 $conexDb->close();
@@ -37,6 +37,6 @@ if ($result) {
     header("Location: estudiantes.php");
     exit;
 } else {
-    echo "Error al modificar el estudiante.";
+    echo "Error al guardar el estudiante.";
 }
 ?>

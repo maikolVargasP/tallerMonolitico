@@ -1,69 +1,47 @@
 <?php
-$hostDb = "localhost";
-$userDb = "root";
-$pwdDb = "";
-$nameDb = "notas_app";
+require __DIR__ . '/../controllers/EstudiantesController.php';
+use App\Controllers\EstudiantesController;
 
-$conexDb = new mysqli(
-    $hostDb,
-    $userDb,
-    $pwdDb,
-    $nameDb
-);
-
-if ($conexDb->connect_error) {
-    die("DB error: " . $conexDb->connect_error);
-}
-
-$sql = "select * from estudiantes";
-$result = $conexDb->query($sql);
+$controller = new EstudiantesController();
+$estudiantes = $controller->queryAllEstudiantes();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Inicio</title>
+    <title>Lista de estudiantes</title>
 </head>
-
 <body>
-       <h1>Lista de estudiantes</h1>
-    <br>
-    <a href="estudiante-form.php">Crear</a>
-    <table>
+    <h1>Lista de estudiantes</h1>
+    <a href="estudiante-form.php">Crear nuevo</a>
+    <table border="1" cellpadding="5">
         <thead>
             <tr>
-                <th>Codigo</th>
+                <th>Código</th>
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Programa</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<tr>';
-                    echo ' <td>' . $row['codigo'] . '</td>';
-                    echo ' <td>' . $row['nombre'] . '</td>';
-                    echo ' <td>' . $row['email'] . '</td>';
-                    echo ' <td>' . $row['programa'] . '</td>';
-                    echo ' <td>';
-                    echo '   <a href="estudiante-form.php?cod=' . $row['codigo'] . '">Modificar</a>';
-                    echo ' </td>';
-                    echo '</tr>';
-                }
-            } else {
-                echo '<tr>';
-                echo ' <td colspan="3">No registros</td>';
-                echo '</tr>';
-            }
-            ?>
+        <?php if (!empty($estudiantes)): ?>
+            <?php foreach ($estudiantes as $e): ?>
+                <tr>
+                    <td><?= $e->get('codigo') ?></td>
+                    <td><?= $e->get('nombre') ?></td>
+                    <td><?= $e->get('email') ?></td>
+                    <td><?= $e->get('programa') ?></td>
+                    <td>
+                        <a href="estudiante-form.php?cod=<?= $e->get('codigo') ?>">Modificar</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr><td colspan="5">No hay registros</td></tr>
+        <?php endif; ?>
         </tbody>
     </table>
 </body>
-
 </html>
-<?php
-$conexDb->close();
-?>

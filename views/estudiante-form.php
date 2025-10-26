@@ -28,9 +28,14 @@ $resultado = $conexion->query($sql);
     <a href="../index.php">Volver</a>
     <br>
     <form action="<?php echo $action; ?>" method="post">
-        <?php
+            <?php
         if (!empty($cod)) {
-            echo '<input type="hidden" name="id" value="' . $cod . '">';
+            echo '<input type="hidden" name="codigo" value="' . $cod . '">';
+        } else {
+            echo '<div>
+                    <label for="codigo">Código:</label>
+                    <input type="text" name="codigo" id="codigo" required>
+                </div>';
         }
         ?>
         <div>

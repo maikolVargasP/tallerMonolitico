@@ -25,7 +25,7 @@ $resultado = $conexion->query($sql);
 <body>
     <h1><?php echo $titulo; ?></h1>
     <br>
-    <a href="../index.php">Volver</a>
+    <a href="../../index.php">Volver</a>
     <br>
     <form action="<?php echo $action; ?>" method="post">
             <?php
@@ -45,7 +45,7 @@ $resultado = $conexion->query($sql);
         
         <div>
             <label for="email">Email:</label>
-            <input type="email" name="correo" id="email">
+            <input type="email" name="email" id="email">
         </div>
         <div>
             <label for="programa">Programa:</label>

@@ -26,6 +26,7 @@ class AppNotasDB
     {
         $this->conexDb->close();
     }
+    
 
     public function execSQL($sql, $isSelect, ...$bindParam) 
     {

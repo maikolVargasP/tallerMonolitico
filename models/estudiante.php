@@ -81,7 +81,7 @@ public function __construct($codigo = null, $nombre = null, $email = null, $prog
         $result = $db->execSQL(
             $sql,
             false,
-            "sssi",
+            "ssss",
             $this->nombre,
             $this->email,
             $this->programa,
@@ -97,7 +97,7 @@ public function __construct($codigo = null, $nombre = null, $email = null, $prog
         $result = $db->execSQL(
             $sql,
             false,
-            "i",
+            "s",
             $this->codigo
         );
         $db->close();

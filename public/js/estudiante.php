@@ -14,7 +14,7 @@ function onClickBorrar(codigo) {
     .then(response => response.text())
     .then(data => {
         if (data.trim() === "ok") {
-            alert("Estudiante eliminado correctamente.");
+            alert("Estudiante eliminad o correctamente.");
             location.reload(); // Recargar la lista
         } else if (data.trim() === "error") {
             alert("No se pudo eliminar el estudiante. Es posible que tenga notas registradas.");

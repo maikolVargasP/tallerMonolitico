@@ -25,7 +25,7 @@ $resultado = $conexion->query($sql);
 <body>
     <h1><?php echo $titulo; ?></h1>
     <br>
-    <a href="../../index.php">Volver</a>
+    <a href="estudiantes.php">Volver</a>
     <br>
     <form action="<?php echo $action; ?>" method="post">
             <?php
@@ -34,13 +34,13 @@ $resultado = $conexion->query($sql);
         } else {
             echo '<div>
                     <label for="codigo">Código:</label>
-                    <input type="text" name="codigo" id="codigo" required>
+                    <input type="text" name="codigo" id="codigo" required placeholder="Maximo 5 caracteres">
                 </div>';
         }
         ?>
         <div>
-            <label for="name">Nombre:</label>
-            <input type="text" name="nombre" id="name">
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre">
         </div>
         
         <div>

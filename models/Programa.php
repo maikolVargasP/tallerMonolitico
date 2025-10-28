@@ -20,7 +20,6 @@ public function __construct($codigo = null, $nombre = null)
 {
     $this->codigo = $codigo;
     $this->nombre = $nombre;
- 
 }
 
     public function get($prop)
@@ -59,7 +58,7 @@ public function __construct($codigo = null, $nombre = null)
         $result = $db->execSQL(
             $sql,
             false,
-            "ss", // cuatro strings: codigo, nombre, email, programa
+            "ss", // dos strings: codigo, nombre
             $this->codigo,
             $this->nombre,
         );
@@ -95,8 +94,6 @@ public function __construct($codigo = null, $nombre = null)
         $db->close();
         return $result;
     }
-
-    
 
     
     public function tieneEstudiantes()

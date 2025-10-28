@@ -5,7 +5,7 @@ require __DIR__ . "/../models/Programa.php";
 
 use App\Models\Programa;
 
-class Programacontroller
+class ProgramaController
 {
     public function queryAllProgramas()
     {
@@ -30,7 +30,7 @@ class Programacontroller
         return $programa->insert();
     }
 
-    public function deletePrograma($request)
+    public function deletePrograma($codigo)
     {
         if (empty($codigo)) {
             return false;
@@ -44,6 +44,7 @@ class Programacontroller
 
         return $programa->delete();
     }
+
     public function updatePrograma($request)
     {
         if (empty($request['codigo']) || empty($request['nombre'])) {

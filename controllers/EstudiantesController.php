@@ -40,15 +40,16 @@ class EstudiantesController
             return false;
         }
 
-        $estudiante = new Estudiante(
-            $request['codigo'],
-            '',
-            '',
-            ''
-        );
+        $estudiante = new Estudiante($request['codigo']);
+
+        // No se puede eliminar si tiene notas
+        if ($estudiante->tieneNotas()) {
+            return "notas";
+        }
 
         return $estudiante->delete();
     }
+
 
     public function updateEstudiante($request)
     {
@@ -68,6 +69,12 @@ class EstudiantesController
             $request['programa']
         );
 
+        // No se puede modificar si tiene notas registradas
+        if ($estudiante->tieneNotas()) {
+            return "notas";
+        }
+
         return $estudiante->update();
     }
+
 }

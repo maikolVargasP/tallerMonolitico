@@ -103,4 +103,16 @@ public function __construct($codigo = null, $nombre = null, $email = null, $prog
         $db->close();
         return $result;
     }
+        public function tieneNotas()
+    {
+        $db = new AppNotasDB();
+        $sql = "SELECT COUNT(*) AS total FROM notas WHERE estudiante = ?";
+        $result = $db->execSQL($sql, true, "s", $this->codigo);
+
+        $row = $result->fetch_assoc();
+        $db->close();
+
+        return $row['total'] > 0; // true si tiene notas registradas
+    }
+
 }

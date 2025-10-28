@@ -4,7 +4,7 @@ function onClickBorrar(codigo) {
     }
 
     // Enviar la solicitud vía fetch a eliminar-estudiante.php
-    fetch("eliminar-estudiante.php", {
+    fetch("../../views/programas/eliminar-programa.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",

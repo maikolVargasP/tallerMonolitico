@@ -11,10 +11,10 @@ $programa = $controller->queryAllProgramas();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de estudiantes</title>
+    <title>Lista de programas</title>
 </head>
 <body>
-    <h1>Lista de estudiantes</h1>
+    <h1>Lista de programas</h1>
     <a href="programa-form.php">Crear nuevo</a>
     <a href="../home.php">Volver</a>
     <table border="1" cellpadding="5">

@@ -13,20 +13,17 @@ function onClickBorrar(codigo) {
     })
     .then(response => response.text())
     .then(data => {
-        const mensaje = data.trim();
+        const resultado = data.trim();
 
-        if (mensaje === "ok") {
+        if (resultado === "ok") {
             alert("Programa eliminado correctamente.");
-            location.reload(); // recarga la lista actual
-        } 
-        else if (mensaje === "relaciones") {
-            alert("No se puede eliminar el programa: tiene estudiantes o materias asociadas.");
-        } 
-        else if (mensaje === "error") {
+            location.reload(); // Recargar la tabla
+        } else if (resultado === "relaciones") {
+            alert("No se puede eliminar el programa porque tiene estudiantes o materias asociadas.");
+        } else if (resultado === "error") {
             alert("No se pudo eliminar el programa por un error en el servidor.");
-        } 
-        else {
-            alert("Respuesta inesperada del servidor: " + mensaje);
+        } else {
+            alert("Respuesta inesperada: " + resultado);
         }
     })
     .catch(err => {

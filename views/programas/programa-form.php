@@ -25,7 +25,7 @@ $resultado = $conexion->query($sql);
 <body>
     <h1><?php echo $titulo; ?></h1>
     <br>
-    <a href="../../index.php">Volver</a>
+    <a href="programas.php">Volver</a>
     <br>
     <form action="<?php echo $action; ?>" method="post">
             <?php
@@ -34,24 +34,13 @@ $resultado = $conexion->query($sql);
         } else {
             echo '<div>
                     <label for="codigo">Código:</label>
-                    <input type="text" name="codigo" id="codigo" required>
+                    <input type="text" name="codigo" id="codigo" required placeholder="Maximo 4 caracteres">
                 </div>';
         }
         ?>
         <div>
-            <label for="name">Nombre:</label>
-            <input type="text" name="nombre" id="name">
-        </div>
-        
-                <?php
-                if ($resultado->num_rows > 0) {
-                    while ($fila = $resultado->fetch_assoc()) {
-                        echo '<option value="' . $fila["codigo"] . '">' . $fila["nombre"] . '</option>';
-                    }
-                }
-                ?>
-            </select>
-        </div>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" id="nombre">
         <div>
             <button type="submit">Guardar</button>
         </div>

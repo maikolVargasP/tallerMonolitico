@@ -15,14 +15,12 @@ class SqlPrograma
 
     public static function insertInto()
     {
-        // Incluye el campo 'codigo' porque será ingresado manualmente
-        return "INSERT INTO programas (codigo, nombre) VALUES (?, ?, ?, ?)";
+        return "INSERT INTO programas (codigo, nombre) VALUES (?, ?)";
     }
 
     public static function update()
     {
-        // Actualiza por código
-        return "UPDATE programas SET nombre = ?, WHERE codigo = ?";
+        return "UPDATE programas SET nombre = ? WHERE codigo = ?";
     }
 
     public static function delete()

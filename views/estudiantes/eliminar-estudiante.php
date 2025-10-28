@@ -1,17 +1,23 @@
 <?php
-require __DIR__ . '/../../controllers/EstudiantesController.php';
-use App\Controllers\EstudiantesController;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+header("Content-Type: text/plain");
 
-if (isset($_POST['codigo'])) {
-    $controller = new EstudiantesController();
-    $resultado = $controller->deleteEstudiante($_POST);
+require __DIR__ . '/../../controllers/ProgramaController.php';
+use App\Controllers\ProgramaController;
 
-    if ($resultado) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $codigo = $_POST['codigo'] ?? null;
+    $controller = new ProgramaController();
+    $resultado = $controller->deletePrograma($codigo);
+
+    if ($resultado === true) {
         echo "ok";
+    } elseif ($resultado === "relaciones") {
+        echo "relaciones";
     } else {
         echo "error";
     }
 } else {
-    echo "no-data";
+    echo "Método no permitido";
 }
-?>

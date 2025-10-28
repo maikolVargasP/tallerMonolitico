@@ -2,8 +2,19 @@
 require __DIR__ . '/../../controllers/EstudiantesController.php';
 use App\Controllers\EstudiantesController;
 
-$controller = new EstudiantesController();
-$estudiantes = $controller->queryAllEstudiantes();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $controller = new EstudiantesController();
+    $resultado = $controller->deleteEstudiante($_POST);
+
+    if ($resultado === true) {
+        echo "ok";
+    } elseif ($resultado === "notas") {
+        echo "tiene_notas";
+    } else {
+        echo "error";
+    }
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

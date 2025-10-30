@@ -6,6 +6,7 @@
     <title>Home</title>
     <link rel="stylesheet" href="../public/css/modals.css">
 </head>
+
 <body class="home2">
     <section class="container">
         <header>
@@ -32,5 +33,6 @@
         </nav>
     </section>
     <script src="../public/js/home.js"></script>
+
 </body>
 </html>

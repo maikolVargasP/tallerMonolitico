@@ -6,7 +6,6 @@
     $controller = new ProgramaController(); 
     $programa = $controller->queryAllProgramas();
     ?>
-
     <!DOCTYPE html>
     <html lang="es">
     <head>

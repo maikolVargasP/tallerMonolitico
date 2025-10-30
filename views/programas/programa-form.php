@@ -20,6 +20,7 @@ $resultado = $conexion->query($sql);
 <head>
     <meta charset="UTF-8">
     <title>Programas</title>
+    <link rel="stylesheet" href="../../public/css/modals.css">
 </head>
 
 <body>

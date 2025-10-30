@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Lista de estudiantes</title>
+    <link rel="stylesheet" href="../../public/css/modals.css">
 </head>
 <body>
     <h1>Lista de estudiantes</h1>

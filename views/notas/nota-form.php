@@ -21,6 +21,7 @@ $estudiantes = $conexion->query("SELECT codigo, nombre FROM estudiantes");
 <head>
     <meta charset="UTF-8">
     <title><?php echo $titulo; ?></title>
+    <link rel="stylesheet" href="../../public/css/modals.css">
 </head>
 <body>
     <h1><?php echo $titulo; ?></h1>

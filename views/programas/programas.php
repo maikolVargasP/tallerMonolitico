@@ -12,6 +12,7 @@ $programa = $controller->queryAllProgramas();
 <head>
     <meta charset="UTF-8">
     <title>Lista de programas</title>
+    <link rel="stylesheet" href="../../public/css/modals.css">
 </head>
 <body>
     <h1>Lista de programas</h1>

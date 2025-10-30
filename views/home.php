@@ -7,7 +7,7 @@
 </head>
 <body>
     <button><a href="estudiantes/estudiantes.php">Estudiantes</a></button>
-    <button>Materias</button>
+    <button> <a href="materias/materias.php">Materias</a></button>
     <button>Notas</button>
     <button><a href="programas/programas.php">Programa</a></button>
 </body>

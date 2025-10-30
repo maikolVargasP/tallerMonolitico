@@ -49,6 +49,7 @@ public function __construct($codigo = null, $nombre = null)
     }
     public function find()
     {
+        
     }
     public function insert()
     {

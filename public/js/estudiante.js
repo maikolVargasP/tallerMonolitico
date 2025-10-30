@@ -1,10 +1,9 @@
 function onClickBorrar(codigo) {
     if (!confirm("¿Seguro que deseas eliminar este estudiante?")) {
-        return; // El usuario canceló
+        return;
     }
 
-    // Enviar la solicitud vía fetch a eliminar-estudiante.php
-    fetch("../../views/programas/eliminar-programa.php", {
+    fetch("eliminar-estudiante.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -15,11 +14,11 @@ function onClickBorrar(codigo) {
     .then(data => {
         if (data.trim() === "ok") {
             alert("Estudiante eliminado correctamente.");
-            location.reload(); // Recargar la lista
-        } else if (data.trim() === "error") {
-            alert("No se pudo eliminar el estudiante. Es posible que tenga notas registradas.");
+            location.reload();
+        } else if (data.trim() === "tiene_notas") {
+            alert("No se puede eliminar el estudiante porque tiene notas registradas.");
         } else {
-            alert("Error inesperado: " + data);
+            alert("Error al eliminar el estudiante.");
         }
     })
     .catch(err => {

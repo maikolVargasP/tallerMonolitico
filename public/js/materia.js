@@ -1,10 +1,9 @@
 function onClickBorrar(codigo) {
-    if (!confirm("¿Seguro que deseas eliminar este estudiante?")) {
-        return; // El usuario canceló
+    if (!confirm("¿Seguro que deseas eliminar esta materia?")) {
+        return; // cancelado
     }
 
-    // Enviar la solicitud vía fetch a eliminar-estudiante.php
-    fetch("../../views/programas/eliminar-programa.php", {
+    fetch("eliminar-materia.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -14,16 +13,16 @@ function onClickBorrar(codigo) {
     .then(response => response.text())
     .then(data => {
         if (data.trim() === "ok") {
-            alert("Estudiante eliminad o correctamente.");
-            location.reload(); // Recargar la lista
-        } else if (data.trim() === "error") {
-            alert("No se pudo eliminar el estudiante. Es posible que tenga notas registradas.");
+            alert("Materia eliminada correctamente.");
+            location.reload();
+        } else if (data.trim() === "tiene_notas") {
+            alert("No se puede eliminar la materia porque tiene notas registradas.");
         } else {
-            alert("Error inesperado: " + data);
+            alert("Error al eliminar la materia.");
         }
     })
     .catch(err => {
-        console.error("Error al eliminar estudiante:", err);
-        alert("Ocurrió un error al intentar eliminar el estudiante.");
+        console.error("Error al eliminar materia:", err);
+        alert("Error en el servidor al intentar eliminar la materia.");
     });
 }

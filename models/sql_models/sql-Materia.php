@@ -32,6 +32,6 @@ class SqlMateria
 
     public static function tieneNotas()
     {
-        return "SELECT COUNT(*) AS total FROM notas WHERE cod_materia = ?";
+        return "SELECT COUNT(*) AS total FROM notas WHERE materia = ?";
     }
 }

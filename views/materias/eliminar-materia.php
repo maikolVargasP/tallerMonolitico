@@ -1,10 +1,11 @@
 <?php
-require __DIR__ . '/../../controllers/EstudiantesController.php';
-use App\Controllers\EstudiantesController;
+require __DIR__ . '/../../controllers/MateriasController.php';
+use App\Controllers\MateriasController;
 
+// Verificar que sea POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $controller = new EstudiantesController();
-    $resultado = $controller->deleteEstudiante($_POST);
+    $controller = new MateriasController();
+    $resultado = $controller->deleteMateria($_POST);
 
     if ($resultado === true) {
         echo "ok";

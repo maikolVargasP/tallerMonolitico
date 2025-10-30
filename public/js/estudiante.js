@@ -26,3 +26,20 @@ function onClickBorrar(codigo) {
         alert("Ocurrió un error al intentar eliminar el estudiante.");
     });
 }
+function buscarEstudiante() {
+    const codigo = document.getElementById("buscarCodigo").value.trim();
+    if (codigo === "") {
+        alert("Por favor ingresa un código para buscar.");
+        return;
+    }
+
+    fetch("buscar-estudiante.php?codigo=" + encodeURIComponent(codigo))
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("resultadoBusqueda").innerHTML = data;
+        })
+        .catch(err => {
+            console.error("Error al buscar estudiante:", err);
+            alert("Ocurrió un error en la búsqueda.");
+        });
+}

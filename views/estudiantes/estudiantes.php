@@ -31,6 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a href="estudiante-form.php">Crear nuevo</a>
     <a href="../home.php">Volver</a>
 
+    <div class="search-box" style="margin-top: 20px;">
+        <label for="buscarCodigo">Buscar por código:</label>
+        <input type="text" id="buscarCodigo" placeholder="Ej: 1001">
+        <button type="button" onclick="buscarEstudiante()">Buscar</button>
+    </div>
+
+
     <table border="1" cellpadding="5">
         <thead>
             <tr>

@@ -70,7 +70,7 @@ class Nota
         return $result;
     }
 
-    // Calcula el promedio de notas por estudiante y materia
+   
     public function calcularPromedio()
     {
         $sql = "SELECT ROUND(AVG(nota), 2) AS promedio FROM notas WHERE materia = ? AND estudiante = ?";

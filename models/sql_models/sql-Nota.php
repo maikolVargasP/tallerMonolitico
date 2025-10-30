@@ -5,34 +5,27 @@ class SqlNota
 {
     public static function selectAll()
     {
-        return "SELECT n.id, e.nombre AS estudiante, m.nombre AS materia, n.nota
-                FROM notas n
-                JOIN estudiantes e ON n.cod_estudiante = e.codigo
-                JOIN materias m ON n.cod_materia = m.codigo";
+        return "SELECT * FROM notas";
     }
 
-    public static function selectById()
+    public static function selectByEstudiante()
     {
-        return "SELECT * FROM notas WHERE id = ?";
+        return "SELECT * FROM notas WHERE estudiante = ?";
     }
 
     public static function insertInto()
     {
-        return "INSERT INTO notas (cod_estudiante, cod_materia, nota) VALUES (?, ?, ?)";
+        return "INSERT INTO notas (materia, estudiante, actividad, nota) VALUES (?, ?, ?, ?)";
     }
 
     public static function update()
     {
-        return "UPDATE notas SET nota = ? WHERE id = ?";
+        return "UPDATE notas SET materia = ?, estudiante = ?, actividad = ?, nota = ? WHERE materia = ? AND estudiante = ? AND actividad = ?";
     }
 
     public static function delete()
     {
-        return "DELETE FROM notas WHERE id = ?";
-    }
-
-    public static function existeNota()
-    {
-        return "SELECT COUNT(*) AS total FROM notas WHERE cod_estudiante = ? AND cod_materia = ?";
+        return "DELETE FROM notas WHERE materia = ? AND estudiante = ? AND actividad = ?";
     }
 }
+?>

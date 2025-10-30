@@ -1,37 +1,42 @@
 <?php
 namespace App\Models;
 
-require __DIR__ . "/sql_models/sql-nota.php";
 require __DIR__ . "/databases/notas-AppDB.php";
 
-use App\Models\SQLModels\SqlNota;
 use App\Models\Databases\AppNotasDB;
 
 class Nota
 {
-    public $id;
-    public $cod_estudiante;
-    public $cod_materia;
+    public $materia;
+    public $estudiante;
+    public $actividad;
     public $nota;
 
-    public function __construct($id = null, $cod_estudiante = null, $cod_materia = null, $nota = null)
+    public function __construct($materia = null, $estudiante = null, $actividad = null, $nota = null)
     {
-        $this->id = $id;
-        $this->cod_estudiante = $cod_estudiante;
-        $this->cod_materia = $cod_materia;
+        $this->materia = $materia;
+        $this->estudiante = $estudiante;
+        $this->actividad = $actividad;
         $this->nota = $nota;
+    }
+    public function get($prop)
+    {
+        return $this->{$prop};
+    }
+    public function set($prop, $value)
+    {
+        $this->{$prop} = $value;
     }
 
     public function all()
     {
+        $sql = "SELECT * FROM notas";
         $db = new AppNotasDB();
-        $sql = SqlNota::selectAll();
         $result = $db->execSQL($sql, true);
         $notas = [];
 
         while ($row = $result->fetch_assoc()) {
-            $nota = new Nota($row['id'], $row['estudiante'], $row['materia'], $row['nota']);
-            array_push($notas, $nota);
+            $notas[] = new Nota($row['materia'], $row['estudiante'], $row['actividad'], $row['nota']);
         }
 
         $db->close();
@@ -40,43 +45,40 @@ class Nota
 
     public function insert()
     {
-        // Verificar si ya existe nota para ese estudiante y materia
-        if ($this->existeNota()) {
-            return "existe";
-        }
-
+        $sql = "INSERT INTO notas (materia, estudiante, actividad, nota) VALUES (?, ?, ?, ?)";
         $db = new AppNotasDB();
-        $sql = SqlNota::insertInto();
-        $result = $db->execSQL($sql, false, "ssd", $this->cod_estudiante, $this->cod_materia, $this->nota);
+        $result = $db->execSQL($sql, false, "sssd", $this->materia, $this->estudiante, $this->actividad, $this->nota);
         $db->close();
         return $result;
     }
 
     public function update()
     {
+        $sql = "UPDATE notas SET nota = ? WHERE materia = ? AND estudiante = ? AND actividad = ?";
         $db = new AppNotasDB();
-        $sql = SqlNota::update();
-        $result = $db->execSQL($sql, false, "di", $this->nota, $this->id);
+        $result = $db->execSQL($sql, false, "dsss", $this->nota, $this->materia, $this->estudiante, $this->actividad);
         $db->close();
         return $result;
     }
 
     public function delete()
     {
+        $sql = "DELETE FROM notas WHERE materia = ? AND estudiante = ? AND actividad = ?";
         $db = new AppNotasDB();
-        $sql = SqlNota::delete();
-        $result = $db->execSQL($sql, false, "i", $this->id);
+        $result = $db->execSQL($sql, false, "sss", $this->materia, $this->estudiante, $this->actividad);
         $db->close();
         return $result;
     }
 
-    public function existeNota()
+    // Calcula el promedio de notas por estudiante y materia
+    public function calcularPromedio()
     {
+        $sql = "SELECT ROUND(AVG(nota), 2) AS promedio FROM notas WHERE materia = ? AND estudiante = ?";
         $db = new AppNotasDB();
-        $sql = SqlNota::existeNota();
-        $result = $db->execSQL($sql, true, "ss", $this->cod_estudiante, $this->cod_materia);
+        $result = $db->execSQL($sql, true, "ss", $this->materia, $this->estudiante);
         $row = $result->fetch_assoc();
         $db->close();
-        return $row['total'] > 0;
+
+        return $row['promedio'] ?? 0;
     }
 }

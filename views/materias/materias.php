@@ -23,7 +23,6 @@ $materias = $controller->queryAllMaterias();
                 <th>Codigo</th>
                 <th>Nombre</th>
                 <th>Programa</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -40,7 +39,7 @@ $materias = $controller->queryAllMaterias();
                 echo '  </td>';
                 echo '  <td>';
                 echo '      <button>';   
-                echo '      <a href="materias-form.php?cod=' . $m->get('codigo') . '">';
+                echo '      <a href="materia-form.php?cod=' . $m->get('codigo') . '">';
                 echo '          <img src="../../public/res/modificar.svg" alt="modificar" width="30px">';
                 echo '      </a>';
                 echo '      </button>';

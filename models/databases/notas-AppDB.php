@@ -2,6 +2,7 @@
 namespace App\Models\Databases;
 
 use mysqli;
+
 class AppNotasDB
 {
     private $hostDb = "localhost";
@@ -22,13 +23,13 @@ class AppNotasDB
             die("Error DB: " . $this->conexDb->connect_error);
         }
     }
+
     public function close()
     {
         $this->conexDb->close();
     }
-    
 
-    public function execSQL($sql, $isSelect, ...$bindParam) 
+    public function execSQL($sql, $isSelect, ...$bindParam)
     {
         $prepare = $this->conexDb->prepare($sql);
         if (!empty($bindParam)) {
@@ -42,3 +43,4 @@ class AppNotasDB
         }
     }
 }
+?>

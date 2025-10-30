@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/../../controllers/NotasController.php';
-use App\Controllers\NotaController;
+use App\Controllers\NotasController;
 
-$controller = new NotaController(); 
+$controller = new NotasController(); 
 $notas = $controller->queryAllNotas();
 ?>
 
@@ -39,6 +39,6 @@ $notas = $controller->queryAllNotas();
         </tbody>
     </table>
     
-    <script src="../../public/js/programa.php"></script>
+    <script src="../../public/js/notas.js"></script>
 </body>
 </html>

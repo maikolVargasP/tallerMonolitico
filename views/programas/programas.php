@@ -48,6 +48,6 @@ $programa = $controller->queryAllProgramas();
         </tbody>
     </table>
     
-    <script src="../../public/js/programa.php"></script>
+    <script src="../../public/js/programa.js"></script>
 </body>
 </html>

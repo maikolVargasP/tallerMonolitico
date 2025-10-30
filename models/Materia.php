@@ -22,6 +22,14 @@ class Materia extends Model
         $this->nombre = $nombre;
         $this->programa = $programa;
     }
+        public function get($prop)
+    {
+        return $this->{$prop};
+    }
+    public function set($prop, $value)
+    {
+        $this->{$prop} = $value;
+    }
 
     public function all()
     {
@@ -36,29 +44,29 @@ class Materia extends Model
         }
 
         $db->close();
+        return $materias;
     }
-  public function find()
-{
-    $sql = SqlMateria::selectByCodigo();
-    $db = new AppNotasDB();
+    public function find()
+    {
+        $sql = SqlMateria::selectByCodigo();
+        $db = new AppNotasDB();
 
 
-    $result = $db->execSQL($sql, true, "s", $this->codigo);
+        $result = $db->execSQL($sql, true, "s", $this->codigo);
 
-    $materia = null;
-    if ($row = $result->fetch_assoc()) {
-        $materia = new Materia(
-            $row['codigo'],
-            $row['nombre'],
-            $row['programa']
-        );
+        $materia = null;
+        if ($row = $result->fetch_assoc()) {
+            $materia = new Materia(
+                $row['codigo'],
+                $row['nombre'],
+                $row['programa']
+            );
+        }
+
+        $db->close();
+        return $materia;
     }
 
-    $db->close();
-    return $materia;
-}
-
- 
     public function insert()
     {
         $sql = SqlMateria::insertInto();

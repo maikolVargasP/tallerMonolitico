@@ -60,6 +60,12 @@ class ProgramaController
 
         return $programa->update();
     }
+    public function queryProgramaByCodigo($codigo)
+{
+    $programaModel = new Programa();
+    return $programaModel->findByCodigo($codigo);
+}
+
 }
 
 

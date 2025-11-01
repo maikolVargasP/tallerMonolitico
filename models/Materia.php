@@ -103,6 +103,26 @@ class Materia extends Model
         $db->close();
         return $row['total'] > 0;
     }
+    public function findByCodigo($codigo)
+    {
+        $db = new AppNotasDB();
+        $query = SqlMateria::selectByCodigo();
+        $result = $db->execSQL($query, true, "s", $codigo);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return new self(
+                $row['codigo'],
+                $row['nombre'],
+                $row['programa']
+            );
+        }
+
+        $db->close();
+        return null;
+    }
+
 }
+
 
 

@@ -26,7 +26,7 @@ $resultado = $conexion->query($sql);
 <body>
     <h1><?php echo $titulo; ?></h1>
     <br>
-    <a href="programas.php">Volver</a>
+    <a href="programas.php"><img src="../../public/res/back.svg" class="icon"></a>
     <br>
     <form action="<?php echo $action; ?>" method="post">
             <?php

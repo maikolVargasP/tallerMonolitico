@@ -116,5 +116,23 @@ public function __construct($codigo = null, $nombre = null)
         $db->close();
         return $row['total'] > 0;
     }
+    public function findByCodigo($codigo)
+{
+    $db = new AppNotasDB();
+    $query = SqlPrograma::selectByCodigo();
+    $result = $db->execSQL($query, true, "s", $codigo);
+
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return new self(
+            $row['codigo'],
+            $row['nombre']
+        );
+    }
+
+    $db->close();
+    return null;
+}
+
     
 }

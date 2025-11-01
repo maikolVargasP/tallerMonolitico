@@ -71,4 +71,10 @@ class MateriasController
 
         return $materia->update();
     }
+    public function queryMateriaByCodigo($codigo)
+    {
+        $materiaModel = new Materia();
+        return $materiaModel->findByCodigo($codigo);
+    }
+
 }

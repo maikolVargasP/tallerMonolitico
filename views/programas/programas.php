@@ -15,13 +15,26 @@
     </head>
     <body> 
         <h1>Lista de programas</h1>
-        <a href="../home.php"><img src="../../public/res/menu.svg" alt="" class="icon"></a>
-        <a href="programa-form.php">Crear programa</a>
-        <table border="1" cellpadding="5">
+        <a href="../home.php"><img src="../../public/res/back.svg" alt="" class="icon"></a>
+        <a href="programa-form.php"><img src="../../public/res/create.svg" class="icon"></a>
+
+        <div class="search-box">
+            <label for="buscarCodigo"></label>
+            <input type="text" id="buscarCodigo" placeholder="Ingresar código del programa">
+            <button type="button" id="botonBuscarPrograma">
+                <img src="../../public/res/busqueda.svg" width="20px">
+            </button>
+
+
+        </div>
+
+        <div class="tabla-container">
+        <table id="tablaProgramas" border="1" cellpadding="5" class="programa-table">
             <thead>
                 <tr>
                     <th>Código</th>
                     <th>Nombre</th>
+                    <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,8 +47,6 @@
                     echo '      <button onclick="onClickBorrar(' . $p->get('codigo') . ')">';
                     echo '          <img src="../../public/res/borrar.svg" alt="Borrar" width="30px">';
                     echo '      </button>';
-                    echo '  </td>';
-                    echo '  <td>';
                     echo '      <button>';   
                     echo '      <a href="programa-form.php?cod=' . $p->get('codigo') . '">';
                     echo '          <img src="../../public/res/modificar.svg" alt="modificar" width="30px">';
@@ -46,7 +57,8 @@
                 }
                 ?>
             </tbody>
-        </table>
+          </table>
+        </div>
         
         <script src="../../public/js/programa.js"></script>
     </body>

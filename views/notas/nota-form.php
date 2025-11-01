@@ -25,7 +25,7 @@ $estudiantes = $conexion->query("SELECT codigo, nombre FROM estudiantes");
 </head>
 <body>
     <h1><?php echo $titulo; ?></h1>
-    <a href="notas.php">Volver</a>
+    <a href="notas.php"><img src="../../public/res/back.svg" class="icon"></a>
     <br><br>
 
     <form action="<?php echo $action; ?>" method="post">

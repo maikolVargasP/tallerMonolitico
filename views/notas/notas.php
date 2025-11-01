@@ -15,11 +15,11 @@ $notas = $controller->queryAllNotas();
 </head>
 <body>
     <h1>Lista de notas</h1>
-    <a href="nota-form.php">Registrar nueva nota</a>
-    <a href="../home.php">Volver</a>
+    <a href="../home.php"><img src="../../public/res/back.svg" class="icon" alt=""></a>
+    <a href="nota-form.php"><img src="../../public/res/create.svg" class="icon"></a>
     <br><br>
-
-    <table border="1" cellpadding="5">
+    <div class="tabla-container">
+    <table border="1" cellpadding="5" class="programa-table">
         <thead>
             <tr>
                 <th>Materia</th>
@@ -57,7 +57,8 @@ $notas = $controller->queryAllNotas();
             }
             ?>
         </tbody>
-    </table>
+        </table>
+    </div>
 
     <script src="../../public/js/nota.js"></script>
 </body>

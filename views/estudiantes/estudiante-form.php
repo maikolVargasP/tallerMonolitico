@@ -26,29 +26,30 @@ $resultado = $conexion->query($sql);
 <body>
     <h1><?php echo $titulo; ?></h1>
     <br>
-    <a href="estudiantes.php">Volver</a>
+    <a href="estudiantes.php"><img src="../../public/res/back.svg" class="icon"></a>
     <br>
-    <form action="<?php echo $action; ?>" method="post">
+    <div class="form-container">
+    <form action="<?php echo $action; ?>" method="post" class="form-group">
             <?php
         if (!empty($cod)) {
             echo '<input type="hidden" name="codigo" value="' . $cod . '">';
         } else {
-            echo '<div>
+            echo '<div class="form-group">
                     <label for="codigo">Código:</label>
                     <input type="text" name="codigo" id="codigo" required placeholder="Maximo 5 caracteres">
                 </div>';
         }
         ?>
-        <div>
+        <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre">
         </div>
         
-        <div>
+        <div class="form-group">
             <label for="email">Email:</label>
             <input type="email" name="email" id="email">
         </div>
-        <div>
+        <div class="form-group">
             <label for="programa">Programa:</label>
             <select name="programa" id="programa" required>
                 <option value="">Seleccione un programa</option>
@@ -61,10 +62,11 @@ $resultado = $conexion->query($sql);
                 ?>
             </select>
         </div>
-        <div>
-            <button type="submit">Guardar</button>
-        </div>
-    </form>
+          <div>
+            <button type="submit" class="btn-guardar">Guardar</button>
+          </div>
+         </form>
+    </div>
 </body>
 
 </html>

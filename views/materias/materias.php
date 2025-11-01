@@ -15,15 +15,25 @@ $materias = $controller->queryAllMaterias();
 </head>
 <body>
     <h1>Lista de materias</h1>
-    <a href="materia-form.php">Crear nueva materia</a>
-    <a href="../home.php">Volver</a>
 
-    <table border="1" cellpadding="5">
+    <a href="../home.php"><img src="../../public/res/back.svg" class="icon"></a>
+    <a href="materia-form.php"><img src="../../public/res/create.svg" class="icon"></a>
+    
+    <div class="search-box" style="margin-top: 20px;">
+        <label for="buscarCodigo"></label>
+        <input type="text" id="buscarCodigo" placeholder="Buscar código de materia">
+        <button type="button" id="botonBuscarMateria">
+            <img src="../../public/res/busqueda.svg" width="20px">
+        </button>
+    </div>
+    <div class="tabla-container">
+    <table id="tablaMaterias" border="1" cellpadding="5" class="programa-table">
         <thead>
             <tr>
                 <th>Codigo</th>
                 <th>Nombre</th>
                 <th>Programa</th>
+                <th>Accion</th>
             </tr>
         </thead>
         <tbody>
@@ -37,8 +47,6 @@ $materias = $controller->queryAllMaterias();
                 echo '      <button onclick="onClickBorrar(' . $m->get('codigo') . ')">';
                 echo '          <img src="../../public/res/borrar.svg" alt="Borrar" width="30px">';
                 echo '      </button>';
-                echo '  </td>';
-                echo '  <td>';
                 echo '      <button>';   
                 echo '      <a href="materia-form.php?cod=' . $m->get('codigo') . '">';
                 echo '          <img src="../../public/res/modificar.svg" alt="modificar" width="30px">';
@@ -50,6 +58,7 @@ $materias = $controller->queryAllMaterias();
             ?>
         </tbody>
     </table>
+    </div>
 
     <script src='../../public/js/materia.js'></script>
 </body>

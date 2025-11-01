@@ -114,5 +114,29 @@ public function __construct($codigo = null, $nombre = null, $email = null, $prog
 
         return $row['total'] > 0; // true si tiene notas registradas
     }
+    public function findByCodigo($codigo)
+    {
+        $db = new AppNotasDB(); 
+        $query = SqlEstudiante::selectByCodigo();
+        $result = $db->execSQL($query, true, "s", $codigo);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $db->close();
+            return new self(
+                $row['codigo'],
+                $row['nombre'],
+                $row['email'],
+                $row['programa']
+            );
+        }
+
+        $db->close();
+        return null;
+    }
+
+
+
+
 
 }

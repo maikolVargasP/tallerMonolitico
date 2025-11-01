@@ -27,19 +27,18 @@ function onClickBorrar(codigo) {
     });
 }
 function buscarEstudiante() {
-    const codigo = document.getElementById("buscarCodigo").value.trim();
-    if (codigo === "") {
-        alert("Por favor ingresa un código para buscar.");
-        return;
-    }
+    const codigo = document.getElementById("buscarCodigo").value;
 
-    fetch("buscar-estudiante.php?codigo=" + encodeURIComponent(codigo))
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById("resultadoBusqueda").innerHTML = data;
+    fetch(`buscar-estudiante.php?codigo=${codigo}`)
+
+        .then(response => {
+            if (!response.ok) throw new Error("Error HTTP");
+            return response.text();
         })
-        .catch(err => {
-            console.error("Error al buscar estudiante:", err);
+        .then(html => {
+            document.querySelector("#tablaEstudiantes tbody").innerHTML = html;
+        })
+        .catch(() => {
             alert("Ocurrió un error en la búsqueda.");
         });
 }

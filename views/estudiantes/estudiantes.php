@@ -28,18 +28,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../public/css/modals.css">
 </head>
 <body>
-    <h1>Lista de estudiantes</h1>
-    <a href="estudiante-form.php">Crear nuevo</a>
-    <a href="../home.php">Volver</a>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li class="title"><h1>Sistema Estudiantes</h1></li>
+                
+                <li><a href="../materias/materias.php">Materias</a></li>
+                <li><a href="../programas/programas.php">Programas</a></li>
+                <li><a href="../notas/notas.php">Notas</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="search-box" style="margin-top: 20px;">
-        <label for="buscarCodigo">Buscar por código:</label>
-        <input type="text" id="buscarCodigo" placeholder="Ej: 1001">
-        <button type="button" onclick="buscarEstudiante()">Buscar</button>
+    <a href="../home.php"><img src="../../public/res/back.svg" alt="" class="icon"></a>
+    <a href="estudiante-form.php"><img src="../../public/res/create.svg" class="icon"></a>
+    
+    <div class="search-box" >
+        <label for="buscarCodigo"></label>
+        <input type="text" id="buscarCodigo" placeholder="Ingresar codigo estudiante">
+        <button type="button" onclick="buscarEstudiante()"><img src="../../public/res/busqueda.svg" class="icon"></button>
     </div>
 
 
-    <table border="1" cellpadding="5">
+    <div class="tabla-container">
+    <table id="tablaEstudiantes" border="1" cellpadding="5" class="programa-table">
         <thead>
             <tr>
                 <th>Código</th>
@@ -73,7 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <tr><td colspan="5">No hay estudiantes registrados.</td></tr>
             <?php endif; ?>
         </tbody>
-    </table>
+        
+        </table>
+    </div>
+
     <script src="../../public/js/estudiante.js"></script>
 </body>
 </html>

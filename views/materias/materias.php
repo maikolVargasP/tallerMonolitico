@@ -14,17 +14,31 @@ $materias = $controller->queryAllMaterias();
     <link rel="stylesheet" href="../../public/css/modals.css">
 </head>
 <body>
-    <h1>Lista de materias</h1>
+        <header>
+        <nav class="navbar">
+            <ul>
+                <li class="title"><h1>Sistema Materias</h1></li>
+                <li class="search-item">
+                    <div class="search-box" >
+                        <label for="buscarCodigo"></label>
+                        <input type="text" id="buscarCodigo" placeholder="Buscar código de materia">
+                        <button type="button" id="botonBuscarMateria">
+                            <img src="../../public/res/busqueda.svg" class="icon">
+                        </button>
+                    </div>
+                </li>
+                <li><a href="../estudiantes/estudiantes.php">Estudiantes</a></li>
+                <li><a href="../programas/programas.php">Programas</a></li>
+                <li><a href="../notas/notas.php">Notas</a></li>
+            </ul>
+            </nav>
+        </header>
 
-    <a href="../home.php"><img src="../../public/res/back.svg" class="icon"></a>
+    <a href="../home.php"><img src="../../public/res/home.svg" class="icon"></a>
     <a href="materia-form.php"><img src="../../public/res/create.svg" class="icon"></a>
     
     <div class="search-box" style="margin-top: 20px;">
-        <label for="buscarCodigo"></label>
-        <input type="text" id="buscarCodigo" placeholder="Buscar código de materia">
-        <button type="button" id="botonBuscarMateria">
-            <img src="../../public/res/busqueda.svg" width="20px">
-        </button>
+        
     </div>
     <div class="tabla-container">
     <table id="tablaMaterias" border="1" cellpadding="5" class="programa-table">

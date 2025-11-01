@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-require __DIR__ . "/../models/Programa.php";
+require_once __DIR__ . "/../models/Programa.php";
 
 use App\Models\Programa;
 

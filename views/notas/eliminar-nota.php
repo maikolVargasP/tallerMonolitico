@@ -6,14 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $controller = new NotasController();
     $resultado = $controller->deleteNota($_POST);
 
-    if ($resultado === true) {
+    if ($resultado) {
         echo "ok";
     } else {
         echo "error";
     }
-    exit;
-} else {
-    echo "invalid";
-    exit;
 }
 ?>

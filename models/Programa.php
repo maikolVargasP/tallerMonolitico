@@ -1,9 +1,9 @@
 <?php
 namespace App\Models;
 
-require __DIR__ . "/sql_models/sql-Programa.php";
-require __DIR__ . "/sql_models/model.php";
-require __DIR__ . "/databases/notas-AppDB.php";
+require_once __DIR__ . "/sql_models/sql-Programa.php";
+require_once __DIR__ . "/sql_models/model.php";
+require_once __DIR__ . "/databases/notas-AppDB.php";
 
 use App\Models\SQLModels\Model;
 use App\Models\SQLModels\SqlPrograma;

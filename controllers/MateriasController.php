@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-require __DIR__ . "/../models/Materia.php";
+require_once __DIR__ . "/../models/Materia.php";
 
 use App\Models\Materia;
 

@@ -5,27 +5,31 @@ class SqlNota
 {
     public static function selectAll()
     {
-        return "SELECT * FROM notas";
+        return "SELECT * FROM notas ORDER BY id ASC";
     }
 
-    public static function selectByEstudiante()
+    public static function selectById()
     {
-        return "SELECT * FROM notas WHERE estudiante = ?";
+        return "SELECT * FROM notas WHERE id = ?";
     }
 
     public static function insertInto()
     {
-        return "INSERT INTO notas (materia, estudiante, actividad, nota) VALUES (?, ?, ?, ?)";
+        return "INSERT INTO notas (id, materia, estudiante, actividad, nota) VALUES (?, ?, ?, ?, ?)";
     }
 
     public static function update()
     {
-        return "UPDATE notas SET materia = ?, estudiante = ?, actividad = ?, nota = ? WHERE materia = ? AND estudiante = ? AND actividad = ?";
+        return "UPDATE notas SET materia = ?, estudiante = ?, actividad = ?, nota = ? WHERE id = ?";
     }
 
     public static function delete()
     {
-        return "DELETE FROM notas WHERE materia = ? AND estudiante = ? AND actividad = ?";
+        return "DELETE FROM notas WHERE id = ?";
+    }
+
+    public static function promedio()
+    {
+        return "SELECT ROUND(AVG(nota), 2) AS promedio FROM notas WHERE materia = ? AND estudiante = ?";
     }
 }
-?>

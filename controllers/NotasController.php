@@ -1,10 +1,9 @@
 <?php
 namespace App\Controllers;
 
-require __DIR__ . '/../models/Nota.php';
+require_once __DIR__ . '/../models/Nota.php';
 
 use App\Models\Nota;
-use App\Models\Databases\AppNotasDB;
 
 class NotasController
 {
@@ -12,6 +11,12 @@ class NotasController
     {
         $nota = new Nota();
         return $nota->all();
+    }
+
+    public function queryNotaById($id)
+    {
+        $nota = new Nota();
+        return $nota->findById($id);
     }
 
     public function saveNewNota($request)
@@ -25,48 +30,61 @@ class NotasController
             return false;
         }
 
-        // Validar que la materia pertenezca al programa del estudiante
-        $db = new AppNotasDB();
-        $sql = "SELECT COUNT(*) AS valid FROM materias m 
-                JOIN estudiantes e ON e.programa = m.programa
-                WHERE m.codigo = ? AND e.codigo = ?";
-        $result = $db->execSQL($sql, true, "ss", $request['materia'], $request['estudiante']);
-        $valid = $result->fetch_assoc()['valid'];
-        $db->close();
+        $nota = new Nota(
+            null,
+            $request['materia'],
+            $request['estudiante'],
+            $request['actividad'],
+            $request['nota']
+        );
 
-        if ($valid == 0) {
-            return "no_coincide_programa";
-        }
-
-        // Registrar nota
-        $nota = new Nota($request['materia'], $request['estudiante'], $request['actividad'], $request['nota']);
         return $nota->insert();
     }
 
     public function updateNota($request)
-    {
-        if (empty($request['materia']) || empty($request['estudiante']) || empty($request['actividad']) || empty($request['nota'])) {
-            return false;
-        }
-
-        $nota = new Nota($request['materia'], $request['estudiante'], $request['actividad'], $request['nota']);
-        return $nota->update();
+{
+    if (empty($request['id']) || empty($request['nota'])) {
+        return false;
     }
 
-    public function deleteNota($request)
+    
+    $notaExistente = $this->queryNotaById($request['id']);
+    if (!$notaExistente) {
+        return false;
+    }
+
+    
+    $nota = new Nota(
+        $request['id'],
+        $notaExistente->get('materia'),
+        $notaExistente->get('estudiante'),
+        $notaExistente->get('actividad'),
+        $request['nota']
+    );
+
+    return $nota->update();
+}
+
+
+    public function deleteNota($id)
     {
-        if (empty($request['materia']) || empty($request['estudiante']) || empty($request['actividad'])) {
+        if (empty($id)) {
             return false;
         }
 
-        $nota = new Nota($request['materia'], $request['estudiante'], $request['actividad']);
+        $nota = new Nota($id);
         return $nota->delete();
     }
 
-    // Calcular el promedio actual de un estudiante en una materia
     public function getPromedio($materia, $estudiante)
     {
-        $nota = new Nota($materia, $estudiante);
-        return $nota->calcularPromedio();
+        $nota = new Nota();
+        return $nota->calcularPromedio($materia, $estudiante);
     }
+    public function queryNotasByEstudiante($codigoEstudiante)
+{
+    $notaModel = new Nota();
+    return $notaModel->findByEstudiante($codigoEstudiante);
+}
+
 }

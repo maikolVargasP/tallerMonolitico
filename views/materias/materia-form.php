@@ -25,26 +25,27 @@ $resultado = $conexion->query($sql);
 </head>
 
 <body>
-    <h1><?php echo $titulo; ?></h1>
-    <br>
     <a href="materias.php"><img src="../../public/res/back.svg" class="icon"></a>
+    <br>
+    <div class="form-container">
+    <h1><?php echo $titulo; ?></h1>
     <br>
     <form action="<?php echo $action; ?>" method="post">
     <?php
     if (!empty($cod)) {
         echo '<input type="hidden" name="codigo" value="' . $cod . '">';
     } else {
-        echo '<div>
+        echo '<div class="form-group">
                 <label for="codigo">Código:</label>
                 <input type="text" name="codigo" id="codigo" required>
             </div>';
     }
     ?>
-    <div>
+    <div class="form-group">
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" required>
     </div>
-    <div>
+    <div class="form-group">
         <label for="programa">Programa:</label>
         <select name="programa" id="programa" required>
             <option value="">Seleccione un programa</option>
@@ -58,8 +59,9 @@ $resultado = $conexion->query($sql);
         </select>
     </div>
     <div>
-        <button type="submit">Guardar</button>
+        <button type="submit" class="btn-guardar">Guardar</button>
     </div>
     </form>
+    </div>
 </body>
 </html>

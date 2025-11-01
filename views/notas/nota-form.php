@@ -1,81 +1,88 @@
 <?php
-$materia = empty($_GET["materia"]) ? "" : $_GET["materia"];
-$estudiante = empty($_GET["estudiante"]) ? "" : $_GET["estudiante"];
-$actividad = empty($_GET["actividad"]) ? "" : $_GET["actividad"];
+require __DIR__ . '/../../controllers/NotasController.php';
+require __DIR__ . '/../../controllers/EstudiantesController.php';
+require __DIR__ . '/../../controllers/MateriasController.php';
 
-$titulo = empty($materia) ? "Registrar nota" : "Modificar nota";
-$action = empty($materia) ? "registrar-nota.php" : "modificar-nota.php";
+use App\Controllers\NotasController;
+use App\Controllers\EstudiantesController;
+use App\Controllers\MateriasController;
 
-// Conexión para obtener listas
-$conexion = new mysqli("localhost", "root", "", "notas_app");
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+$controller = new NotasController();
+$estudiantesCtrl = new EstudiantesController();
+$materiasCtrl = new MateriasController();
+
+$estudiantes = $estudiantesCtrl->queryAllEstudiantes();
+$materias = $materiasCtrl->queryAllMaterias();
+
+$id = $_GET["id"] ?? null;
+$titulo = empty($id) ? "Registrar nota" : "Modificar nota";
+$action = empty($id) ? "registrar-nota.php" : "modificar-nota.php";
+
+// Si se está editando, obtener la nota
+$nota = null;
+if (!empty($id)) {
+    $nota = $controller->queryNotaById($id);
 }
-
-$materias = $conexion->query("SELECT codigo, nombre FROM materias");
-$estudiantes = $conexion->query("SELECT codigo, nombre FROM estudiantes");
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $titulo; ?></title>
+    <title><?= $titulo ?></title>
     <link rel="stylesheet" href="../../public/css/modals.css">
 </head>
 <body>
-    <h1><?php echo $titulo; ?></h1>
-    <a href="notas.php"><img src="../../public/res/back.svg" class="icon"></a>
-    <br><br>
+    <a href="notas.php"><img src="../../public/res/back.svg" alt="" class="icon"></a>
+    <br>
+    <div class="form-container">
+    <h1><?= $titulo ?></h1>
+    
 
-    <form action="<?php echo $action; ?>" method="post">
-        <div>
-            <label for="materia">Materia:</label>
-            <select name="materia" id="materia" required <?php echo !empty($materia) ? 'disabled' : ''; ?>>
-                <option value="">Seleccione una materia</option>
-                <?php
-                if ($materias->num_rows > 0) {
-                    while ($fila = $materias->fetch_assoc()) {
-                        $sel = ($fila["codigo"] === $materia) ? "selected" : "";
-                        echo "<option value='{$fila["codigo"]}' $sel>{$fila["nombre"]}</option>";
-                    }
-                }
-                ?>
-            </select>
-            <?php if (!empty($materia)) echo "<input type='hidden' name='materia' value='$materia'>"; ?>
-        </div>
+    <form action="<?= $action ?>" method="post">
+        <?php if (!empty($id)) : ?>
+            <input type="hidden" name="id" value="<?= $id ?>">
+        <?php endif; ?>
 
-        <div>
-            <label for="estudiante">Estudiante:</label>
-            <select name="estudiante" id="estudiante" required <?php echo !empty($estudiante) ? 'disabled' : ''; ?>>
-                <option value="">Seleccione un estudiante</option>
-                <?php
-                if ($estudiantes->num_rows > 0) {
-                    while ($fila = $estudiantes->fetch_assoc()) {
-                        $sel = ($fila["codigo"] === $estudiante) ? "selected" : "";
-                        echo "<option value='{$fila["codigo"]}' $sel>{$fila["nombre"]}</option>";
-                    }
-                }
-                ?>
-            </select>
-            <?php if (!empty($estudiante)) echo "<input type='hidden' name='estudiante' value='$estudiante'>"; ?>
-        </div>
+        <?php if (empty($id)) : ?>
+            <div class="form-group">
+                <label for="materia">Materia:</label>
+                <select name="materia" id="materia" required>
+                    <option value="">Seleccione una materia</option>
+                    <?php foreach ($materias as $m): ?>
+                        <option value="<?= $m->get('codigo') ?>"><?= $m->get('nombre') ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-        <div>
-            <label for="actividad">Actividad:</label>
-            <input type="text" name="actividad" id="actividad" required maxlength="50"
-                value="<?php echo $actividad; ?>"
-                <?php echo !empty($actividad) ? 'readonly' : ''; ?>>
-        </div>
+            <div class="form-group">
+                <label for="estudiante">Estudiante:</label>
+                <select name="estudiante" id="estudiante" required>
+                    <option value="">Seleccione un estudiante</option>
+                    <?php foreach ($estudiantes as $e): ?>
+                        <option value="<?= $e->get('codigo') ?>"><?= $e->get('nombre') ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
 
-        <div>
+            <div class="form-group">
+                <label for="actividad">Actividad:</label>
+                <input type="text" name="actividad" id="actividad" required>
+            </div>
+        <?php else: ?>
+            
+            <p><strong>Materia:</strong> <?= $nota->get('materia') ?></p>
+            <p><strong>Estudiante:</strong> <?= $nota->get('estudiante') ?></p>
+            <p><strong>Actividad:</strong> <?= $nota->get('actividad') ?></p>
+        <?php endif; ?>
+
+        <div class="form-group">
             <label for="nota">Nota:</label>
-            <input type="number" name="nota" id="nota" step="0.01" min="0" max="5" required>
+            <input type="number" name="nota" id="nota" step="0.01" min="0" max="5"
+                value="<?= $nota ? $nota->get('nota') : '' ?>" required>
         </div>
 
-        <div>
-            <button type="submit">Guardar</button>
-        </div>
+        <button type="submit" class="btn-guardar">Guardar</button>
     </form>
+    </div>
 </body>
 </html>

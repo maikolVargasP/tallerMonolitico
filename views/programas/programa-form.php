@@ -24,28 +24,33 @@ $resultado = $conexion->query($sql);
 </head>
 
 <body>
-    <h1><?php echo $titulo; ?></h1>
-    <br>
     <a href="programas.php"><img src="../../public/res/back.svg" class="icon"></a>
     <br>
+    <div class="form-container">
+    <h1><?php echo $titulo; ?></h1>
+    <br>
+    
+    
     <form action="<?php echo $action; ?>" method="post">
             <?php
         if (!empty($cod)) {
             echo '<input type="hidden" name="codigo" value="' . $cod . '">';
         } else {
-            echo '<div>
+            echo '<div class="form-group">
                     <label for="codigo">Código:</label>
                     <input type="text" name="codigo" id="codigo" required placeholder="Maximo 4 caracteres">
                 </div>';
         }
         ?>
-        <div>
+        <div class="form-group">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre">
-        <div>
-            <button type="submit">Guardar</button>
+            <br>
+        <div >
+            <button type="submit" class="btn-guardar">Guardar</button>
         </div>
     </form>
+    </div>
 </body>
 
 </html>

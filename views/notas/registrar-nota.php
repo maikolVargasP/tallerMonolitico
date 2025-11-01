@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/../../controllers/NotasController.php';
+
 use App\Controllers\NotasController;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -9,16 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($resultado === true) {
         header("Location: notas.php");
         exit;
-    } elseif ($resultado === "fuera_programa") {
-        echo "<h2>No se puede registrar la nota.</h2>";
-        echo "<p>La materia no pertenece al programa del estudiante.</p>";
+    } elseif ($resultado === "no_coincide_programa") {
+        echo "<h3>Error: La materia no pertenece al programa del estudiante seleccionado.</h3>";
+        echo '<a href="nota-form.php">Volver</a>';
     } else {
-        echo "<h2>Error al registrar la nota.</h2>";
-        echo "<p>Verifica los datos e intenta nuevamente.</p>";
+        echo "<h3>Error al registrar la nota.</h3>";
+        echo '<a href="nota-form.php">Volver</a>';
     }
-
-    echo '<br><a href="nota-form.php">Volver al formulario</a>';
-    exit;
 } else {
     header("Location: notas.php");
     exit;

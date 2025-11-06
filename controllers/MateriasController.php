@@ -68,7 +68,6 @@ class MateriasController
         if ($materia->tieneNotas()) {
             return "notas"; // No se puede modificar si tiene notas registradas
         }
-
         return $materia->update();
     }
     public function queryMateriaByCodigo($codigo)
@@ -76,5 +75,4 @@ class MateriasController
         $materiaModel = new Materia();
         return $materiaModel->findByCodigo($codigo);
     }
-
 }

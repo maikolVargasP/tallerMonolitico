@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </header>
     
         <a href="../home.php"><img src="../../public/res/home.svg" alt="" class="icon"></a>
-        <a href="programa-form.php"><img src="../../public/res/create.svg" class="icon"></a>
+        <a href="nota-form.php"><img src="../../public/res/create.svg" class="icon"></a>
 
     <div class="tabla-container">
     <table id="tablaNotas" border="1" cellpadding="5" class="programa-table">

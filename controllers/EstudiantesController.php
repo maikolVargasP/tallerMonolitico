@@ -78,7 +78,7 @@ class EstudiantesController
     }
     public function queryEstudianteByCodigo($codigo)
 {
-    $estudianteModel = new \App\Models\Estudiante();
+    $estudianteModel = new Estudiante();
     return $estudianteModel->findByCodigo($codigo);
 }
 
